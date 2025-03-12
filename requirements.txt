@@ -1,0 +1,10 @@
+# FastAPI and Server
+fastapi>=0.68.0
+uvicorn>=0.15.0
+python-multipart>=0.0.5
+python-jose[cryptography]
+PyJWT
+
+crewai 
+crewai-tools
+langchain_openai
