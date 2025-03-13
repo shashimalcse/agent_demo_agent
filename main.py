@@ -22,6 +22,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 load_dotenv(override=True)
 
+os.makedirs('logs', exist_ok=True)
 logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
 
 app = FastAPI(title="LLM Chat API")
