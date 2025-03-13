@@ -103,9 +103,7 @@ async def callback(
     state: str,
 ):
     try:
-        print(code, state)
         auth_code: AuthCode = asgardeo_manager.state_mapping.get(state)
-        print(auth_code.__str__())
         if not auth_code:
             raise HTTPException(status_code=400, detail="Invalid state")
         auth_code.code = code
@@ -123,9 +121,7 @@ async def callback(
     state: str,
 ):
     try:
-        print(code, state)
         auth_code: AuthCode = asgardeo_manager.state_mapping.get(state)
-        print(auth_code.__str__())
         if not auth_code:
             raise HTTPException(status_code=400, detail="Invalid state")
         auth_code.code = code

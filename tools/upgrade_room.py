@@ -96,7 +96,7 @@ class RoomUpgradeTool(BaseTool):
         }
         api_response = requests.post(f"{os.environ['HOTEL_API_BASE_URL']}/bookings/preview", json=booking_preview_data, headers=headers)
         booking_preview_data = api_response.json()
-        html = f"<h1>Room Upgrade</h1><p>Dear {username},</p><p>Your room upgrade request has been successfully processed. Your new room details are as follows:</p><p>Room Type: {booking_preview_data.get('room_type')}</p><p>Price: {booking_preview_data.get('total_price')}</p><p>Check-in: {booking_preview_data.get('check_in')}</p><p>Check-out: {booking_preview_data.get('check_out')}</p><p>Thank you for choosing our hotel.</p>"
+        html = f"<h1>Room Upgrade</h1><p>Dear {username},</p><p>Your upgrade request has been successfully processed. Your new room details are as follows:</p><p>Room Type: {booking_preview_data.get('room_type')}</p><p>Price: ${booking_preview_data.get('total_price')}</p><p>Check-in: {booking_preview_data.get('check_in')}</p><p>Check-out: {booking_preview_data.get('check_out')}</p><p>Thank you for choosing our hotel.</p>"
         return html
 
     def _run(self, booking_id: Union[int, str], room_id: Union[int, str]) -> str:
