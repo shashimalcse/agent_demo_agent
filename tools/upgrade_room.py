@@ -96,7 +96,53 @@ class RoomUpgradeTool(BaseTool):
         }
         api_response = requests.post(f"{os.environ['HOTEL_API_BASE_URL']}/bookings/preview", json=booking_preview_data, headers=headers)
         booking_preview_data = api_response.json()
-        html = f"<h1>Room Upgrade</h1><p>Dear {username},</p><p>Your upgrade request has been successfully processed. Your new room details are as follows:</p><p>Room Type: {booking_preview_data.get('room_type')}</p><p>Price: ${booking_preview_data.get('total_price')}</p><p>Check-in: {booking_preview_data.get('check_in')}</p><p>Check-out: {booking_preview_data.get('check_out')}</p><p>Thank you for choosing our hotel.</p>"
+        html = f"""<!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Room Upgrade Confirmation - Gardeo Hotel</title>
+                        <style>
+                            body {{ font-family: Arial, sans-serif; color: #333; }}
+                            .container {{ max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }}
+                            h1 {{ color: #005f73; }}
+                            .details {{ margin-top: 15px; }}
+                            .details p {{ margin: 5px 0; }}
+                            .footer {{ margin-top: 20px; font-size: 0.9em; color: #555; }}
+                        </style>
+                    </head>
+                    <body>
+                        <div class="container">
+                            <h1>Room Upgrade Confirmation - Gardeo Hotel</h1>
+                            <p>Dear {username},</p>
+
+                            <p>Warm greetings from Gardeo Hotel!</p>
+
+                            <p>We are delighted to inform you that your room upgrade request has been successfully processed. Below are your updated reservation details:</p>
+
+                            <div class="details">
+                                <p><strong>Room Type:</strong> {booking_preview_data['room_type']}</p>
+                                <p><strong>Total Price:</strong> ${booking_preview_data['total_price']}</p>
+                                <p><strong>Check-in Date:</strong> {booking_preview_data['check_in']}</p>
+                                <p><strong>Check-out Date:</strong> {booking_preview_data['check_out']}</p>
+                            </div>
+
+                            <p>Thank you for choosing Gardeo Hotel. We look forward to providing you with a comfortable and memorable stay.</p>
+
+                            <p>Please feel free to contact us if you require any further assistance.</p>
+
+                            <p>Ayubowan! (May you live long!)</p>
+
+                            <p>Warm regards,</p>
+
+                            <p>Kisali<br>Gardeo Hotel</p>
+
+                            <div class="footer">
+                                <p>Bohoma Isthuthi! (Thank you very much!)</p>
+                            </div>
+                        </div>
+                    </body>
+                    </html>"""
         return html
 
     def _run(self, booking_id: Union[int, str], room_id: Union[int, str]) -> str:

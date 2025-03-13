@@ -17,9 +17,8 @@ from utils.state_manager import state_manager
 
 load_dotenv()
 
-
 def create_crew(question, thread_id: str = None):
-    llm = LLM(model='azure/gpt4-o')
+    llm = LLM(model=f'azure/{os.environ['DEPLOYMENT_NAME']}')
     hotel_agent = Agent(
         role='Hotel Assistant Agent',
         goal=(
