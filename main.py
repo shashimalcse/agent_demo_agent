@@ -22,8 +22,6 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 load_dotenv(override=True)
 
-print(os.environ['CIBA_URL'])
-
 logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
 
 app = FastAPI(title="LLM Chat API")
@@ -115,7 +113,7 @@ async def callback(
         token = asgardeo_manager.fetch_user_token(state)
         thread_id = asgardeo_manager.get_thread_id_from_state(state)
         state_manager.add_state(thread_id, FlowState.BOOKING_AUTORIZED)
-        return HTMLResponse(content="<html><body><script>window.location.href = 'http://localhost:3000/auth_success';</script></body></html>", status_code=200)
+        return HTMLResponse(content=f"<html><body><script>window.location.href = '{os.environ['WEBSITE_URL']}/auth_success';</script></body></html>", status_code=200)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
@@ -135,7 +133,7 @@ async def callback(
         token = asgardeo_manager.fetch_google_token(state)
         thread_id = asgardeo_manager.get_thread_id_from_state(state)
         state_manager.add_state(thread_id, FlowState.CALENDAR_AUTORIZED)
-        return HTMLResponse(content="<html><body><script>window.location.href = 'http://localhost:3000/auth_success';</script></body></html>", status_code=200)
+        return HTMLResponse(content=f"<html><body><script>window.location.href = '{os.environ['WEBSITE_URL']}/auth_success';</script></body></html>", status_code=200)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))    
     
